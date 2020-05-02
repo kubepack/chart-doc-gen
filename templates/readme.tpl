@@ -15,8 +15,7 @@ $ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {
 This chart deploys {{ .Project.App }} on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
-
-{{ range .Prerequisites -}}
+{{ range .Prerequisites }}
 - {{ . }}
 {{- end }}
 

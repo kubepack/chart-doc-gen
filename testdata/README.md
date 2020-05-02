@@ -16,7 +16,10 @@ This chart deploys a Stash operator on a [Kubernetes](http://kubernetes.io) clus
 
 ## Prerequisites
 
-- Kubernetes 1.11+
+- Kubernetes v1.14+
+- `--allow-privileged` flag must be set to true for both the API server and the kubelet
+- (If you use Docker) The Docker daemon of the cluster nodes must allow shared mounts
+- Pre-installed HashiCorp Vault server.
 
 ## Installing the Chart
 

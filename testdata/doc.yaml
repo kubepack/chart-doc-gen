@@ -12,7 +12,10 @@ chart:
   values: "-- generate from values file --"
   valuesExample: "-- generate from values file --"
 prerequisites:
-- Kubernetes 1.11+
+- "Kubernetes v1.14+"
+- "`--allow-privileged` flag must be set to true for both the API server and the kubelet"
+- "(If you use Docker) The Docker daemon of the cluster nodes must allow shared mounts"
+- "Pre-installed HashiCorp Vault server."
 release:
   name: stash-operator
   namespace: kube-system
