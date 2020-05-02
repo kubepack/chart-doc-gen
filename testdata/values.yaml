@@ -1,0 +1,169 @@
+# Default values for stash.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Overrides name template
+nameOverride: ""
+# Overrides fullname template
+fullnameOverride: ""
+
+# Number of stash operator replicas to create (only 1 is supported)
+replicaCount: 1
+
+operator:
+  # Docker registry used to pull operator image
+  registry: appscode
+  # Name of operator container image
+  repository: stash
+  # Operator container image tag
+  tag: v0.9.0-rc.6
+  # Compute Resources required by the operator container
+  resources: # +doc-gen:break
+    requests:
+      cpu: "100m"
+  # Security options the operator container should run with
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+pushgateway:
+  # Docker registry used to pull Prometheus pushgateway image
+  registry: prom
+  # Prometheus pushgateway container image
+  repository: pushgateway
+  # Prometheus pushgateway container image tag
+  tag: v0.5.2
+  # Compute Resources required by the Prometheus pushgateway container
+  resources: {}
+  # Security options the Prometheus pushgateway container should run with
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+cleaner:
+  # Docker registry used to pull Webhook cleaner image
+  registry: appscode
+  # Webhook cleaner container image
+  repository: kubectl
+  # Webhook cleaner container image tag
+  tag: v1.16
+
+# Specify an array of imagePullSecrets.
+# Secrets must be manually created in the namespace.
+#
+# Example:
+# helm template charts/stash \
+#   --set imagePullSecrets[0].name=sec0 \
+#   --set imagePullSecrets[1].name=sec1
+imagePullSecrets: []
+
+# Container image pull policy
+imagePullPolicy: IfNotPresent
+
+# If true, installs Stash operator as critical addon
+criticalAddon: false
+
+# Log level for operator
+logLevel: 3
+
+# Annotations applied to operator deployment
+annotations: {}
+
+# Annotations passed to operator pod(s).
+podAnnotations: {}
+
+# Node labels for pod assignment
+nodeSelector: # +doc-gen:break
+  beta.kubernetes.io/os: linux
+  beta.kubernetes.io/arch: amd64
+
+# Tolerations for pod assignment
+tolerations: []
+
+# Affinity rules for pod assignment
+affinity: {}
+
+# Security options the operator pod should run with.
+podSecurityContext: # +doc-gen:break
+  fsGroup: 65535
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+apiserver:
+  # The minimum priority the webhook api group should have at least. Please see
+  # https://github.com/kubernetes/kube-aggregator/blob/release-1.9/pkg/apis/apiregistration/v1beta1/types.go#L58-L64
+  # for more information on proper values of this field.
+  groupPriorityMinimum: 10000
+  # The ordering of the webhook api inside of the group. Please see
+  # https://github.com/kubernetes/kube-aggregator/blob/release-1.9/pkg/apis/apiregistration/v1beta1/types.go#L66-L70
+  # for more information on proper values of this field
+  versionPriority: 15
+  # If true, mutating webhook is configured for Kubernetes workloads
+  enableMutatingWebhook: true
+  # If true, validating webhook is configured for Stash CRDss
+  enableValidatingWebhook: true
+  # CA certificate used by the Kubernetes api server. This field is automatically assigned by the operator.
+  ca: not-ca-cert
+  # If true, bypasses checks that validating webhook is actually enabled in the Kubernetes cluster.
+  bypassValidatingWebhookXray: false
+  # If true, uses kube-apiserver FQDN for AKS cluster to workaround https://github.com/Azure/AKS/issues/522 (default true)
+  useKubeapiserverFqdnForAks: true
+  healthcheck:
+    # If true, enables the readiness and liveliness probes for the operator pod.
+    enabled: false
+  servingCerts:
+    # If true, generates on install/upgrade the certs that allow the kube-apiserver (and potentially ServiceMonitor)
+    # to authenticate operators pods. Otherwise specify certs in `apiserver.servingCerts.{caCrt, serverCrt, serverKey}`.
+    generate: true
+    # CA certficate used by serving certificate of webhook server.
+    caCrt: ""
+    # Serving certficate used by webhook server.
+    serverCrt: ""
+    # Private key for the serving certificate used by webhook server.
+    serverKey: ""
+
+# If true, sends usage analytics
+enableAnalytics: true
+
+monitoring:
+  # Name of monitoring agent (either "prometheus.io/operator" or "prometheus.io/builtin")
+  agent: "none"
+  # Specify whether to monitor Stash backup and recovery
+  backup: false
+  # Specify whether to monitor Stash operator
+  operator: false
+  prometheus:
+    # Specify the namespace where Prometheus server is running or will be deployed.
+    namespace: ""
+  serviceMonitor:
+    # Specify the labels for ServiceMonitor.
+    # Prometheus crd will select ServiceMonitor using these labels.
+    # Only usable when monitoring agent is `prometheus.io/operator`.
+    labels: {}
+
+# Additional psp names passed to operator
+#
+# Example:
+# helm install appscode/stash \
+#   --set additionalPodSecurityPolicies[0]=abc \
+#   --set additionalPodSecurityPolicies[1]=xyz
+additionalPodSecurityPolicies: []
+
+platform:
+  # Set true, if installed in OpenShift
+  openshift: false
