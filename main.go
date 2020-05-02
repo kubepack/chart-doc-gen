@@ -60,7 +60,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	rows, err := PrintComments(obj)
+	rows, err := GenerateValuesTable(obj)
 	if err != nil {
 		panic(err)
 	}

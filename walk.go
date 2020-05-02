@@ -26,9 +26,8 @@ import (
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
 
-// PrintComments recursively copies the comments on fields in from to fields in to
-func PrintComments(from *yaml.RNode) ([][]string, error) {
-	// walk the fields copying comments
+// GenerateValuesTable produces a table of parameters from a chart values file
+func GenerateValuesTable(from *yaml.RNode) ([][]string, error) {
 	p := printer{
 		rows: [][]string{},
 	}
@@ -40,8 +39,6 @@ func PrintComments(from *yaml.RNode) ([][]string, error) {
 	return p.rows, err
 }
 
-// printer implements walk.Visitor, and copies comments to fields shared between 2 instances
-// of a resource
 type printer struct {
 	rows [][]string
 }
