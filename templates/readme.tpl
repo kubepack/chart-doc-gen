@@ -33,7 +33,7 @@ The command deploys {{ .Project.App }} on the Kubernetes cluster in the default 
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `stash-operator`:
+To uninstall/delete the `{{ .Release.Name }}`:
 
 ```console
 $ helm delete {{ .Release.Name }} -n {{ .Release.Namespace }}
@@ -43,7 +43,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Configuration
 
-The following table lists the configurable parameters of the Stash chart and their default values.
+The following table lists the configurable parameters of the {{ .Chart.Name }} chart and their default values.
 
 {{ .Chart.Values }}
 
