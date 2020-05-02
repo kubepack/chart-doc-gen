@@ -18,7 +18,7 @@ operator:
   # Operator container image tag
   tag: v0.9.0-rc.6
   # Compute Resources required by the operator container
-  resources: # +doc-gen:break
+  resources:  # +doc-gen:break
     requests:
       cpu: "100m"
   # Security options the operator container should run with
@@ -81,7 +81,7 @@ annotations: {}
 podAnnotations: {}
 
 # Node labels for pod assignment
-nodeSelector: # +doc-gen:break
+nodeSelector:  # +doc-gen:break
   beta.kubernetes.io/os: linux
   beta.kubernetes.io/arch: amd64
 
@@ -92,7 +92,7 @@ tolerations: []
 affinity: {}
 
 # Security options the operator pod should run with.
-podSecurityContext: # +doc-gen:break
+podSecurityContext:  # +doc-gen:break
   fsGroup: 65535
 
 serviceAccount:
