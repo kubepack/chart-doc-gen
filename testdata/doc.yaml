@@ -9,6 +9,7 @@ repository:
   name: appscode
 chart:
   name: stash
+  version: v0.9.0-rc.0
   values: "-- generate from values file --"
   valuesExample: "-- generate from values file --"
 prerequisites:
