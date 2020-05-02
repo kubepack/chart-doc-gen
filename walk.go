@@ -18,6 +18,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 
 	"kmodules.xyz/chart-doc-gen/walk"
@@ -84,10 +85,15 @@ func ParseComment(s string) (string, string) {
 	for idx++; idx < len(lines); idx++ {
 		line := walk.CommentValue(lines[idx])
 		if line != "" {
-			example = append(example, line)
+			example = append(example, fmt.Sprintf("`%s`", line))
 		}
 	}
-	return strings.Join(desc, " "), strings.Join(example, " <br> ")
+	eg := strings.Join(example, " <br> ")
+	d := strings.Join(desc, " ")
+	if len(eg) > 0 {
+		d = d + " <br> Example: <br> " + eg
+	}
+	return d, eg
 }
 
 func PrintValue(node *yaml.RNode) string {
