@@ -18,8 +18,8 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"text/template"
@@ -28,11 +28,12 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 	flag "github.com/spf13/pflag"
+	y2 "k8s.io/apimachinery/pkg/util/yaml"
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
 
 var (
-	docFile    *string = flag.StringP("doc", "d", "", "Path to a project's doc info file")
+	docFile    *string = flag.StringP("doc", "d", "", "Path to a project's doc.{json|yaml} info file")
 	valuesFile *string = flag.StringP("values", "v", "", "Path to chart values file")
 	tplFile    *string = flag.StringP("template", "t", "readme2.tpl", "Path to a doc template file")
 )
@@ -40,17 +41,18 @@ var (
 func main() {
 	flag.Parse()
 
-	data, err := ioutil.ReadFile(*docFile)
+	f, err := os.Open(*docFile)
 	if err != nil {
 		panic(err)
 	}
+	reader := y2.NewYAMLOrJSONDecoder(f, 2048)
 	var doc DocInfo
-	err = json.Unmarshal(data, &doc)
-	if err != nil {
+	err = reader.Decode(&doc)
+	if err != nil && err != io.EOF {
 		panic(err)
 	}
 
-	data, err = ioutil.ReadFile(*valuesFile)
+	data, err := ioutil.ReadFile(*valuesFile)
 	if err != nil {
 		panic(err)
 	}

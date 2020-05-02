@@ -12,8 +12,8 @@
   },
   "chart": {
     "name": "stash",
-    "values": "-- generate from values file",
-    "valuesExample": "-- generate from values file"
+    "values": "-- generate from values file --",
+    "valuesExample": "-- generate from values file --"
   },
   "prerequisites": ["Kubernetes 1.11+"],
   "release": {
