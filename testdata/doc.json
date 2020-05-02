@@ -1,0 +1,23 @@
+{
+  "project": {
+    "name": "Stash by AppsCode",
+    "shortName": "Stash",
+    "url": "https://github.com/stashed/stash",
+    "description": "Backup your Kubernetes Volumes",
+    "app": "a Stash operator"
+  },
+  "repository": {
+    "url": "https://charts.appscode.com/stable/",
+    "name": "appscode"
+  },
+  "chart": {
+    "name": "stash",
+    "values": "-- generate from values file",
+    "valuesExample": "-- generate from values file"
+  },
+  "prerequisites": ["Kubernetes 1.11+"],
+  "release": {
+    "name": "stash-operator",
+    "namespace": "kube-system"
+  }
+}
