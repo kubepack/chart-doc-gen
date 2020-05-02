@@ -26,7 +26,7 @@ This chart deploys a Stash operator on a [Kubernetes](http://kubernetes.io) clus
 To install the chart with the release name `stash-operator`:
 
 ```console
-$ helm install stash-operator appscode/stash -n kube-system
+$ helm install stash-operator appscode/stash -n kube-system --version=v0.9.0-rc.0
 ```
 
 The command deploys a Stash operator on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -45,7 +45,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Configuration
 
-The following table lists the configurable parameters of the Stash chart and their default values.
+The following table lists the configurable parameters of the `stash` chart and their default values.
 
 |               Parameter               |                                                                                                                    Description                                                                                                                    |                                Default                                |
 |---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|

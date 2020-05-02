@@ -24,7 +24,7 @@ This chart deploys {{ .Project.App }} on a [Kubernetes](http://kubernetes.io) cl
 To install the chart with the release name `{{ .Release.Name }}`:
 
 ```console
-$ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }}
+$ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }}{{ with .Chart.Version }} --version={{.}}{{ end }}
 ```
 
 The command deploys {{ .Project.App }} on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
