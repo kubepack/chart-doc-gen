@@ -1,0 +1,51 @@
+# github.com/PuerkitoBio/purell v1.1.1
+github.com/PuerkitoBio/purell
+# github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578
+github.com/PuerkitoBio/urlesc
+# github.com/davecgh/go-spew v1.1.1
+github.com/davecgh/go-spew/spew
+# github.com/go-errors/errors v1.0.2
+## explicit
+github.com/go-errors/errors
+# github.com/go-openapi/jsonpointer v0.19.3
+github.com/go-openapi/jsonpointer
+# github.com/go-openapi/jsonreference v0.19.2
+github.com/go-openapi/jsonreference
+# github.com/go-openapi/spec v0.19.5
+github.com/go-openapi/spec
+# github.com/go-openapi/swag v0.19.5
+github.com/go-openapi/swag
+# github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e
+github.com/mailru/easyjson/buffer
+github.com/mailru/easyjson/jlexer
+github.com/mailru/easyjson/jwriter
+# github.com/mattn/go-runewidth v0.0.7
+github.com/mattn/go-runewidth
+# github.com/olekukonko/tablewriter v0.0.4
+## explicit
+github.com/olekukonko/tablewriter
+# github.com/spf13/pflag v1.0.5
+## explicit
+github.com/spf13/pflag
+# golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+golang.org/x/net/idna
+# golang.org/x/text v0.3.2
+golang.org/x/text/secure/bidirule
+golang.org/x/text/transform
+golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
+golang.org/x/text/width
+# gopkg.in/yaml.v2 v2.2.7
+gopkg.in/yaml.v2
+# gopkg.in/yaml.v3 v3.0.0-20191120175047-4206685974f2
+gopkg.in/yaml.v3
+# sigs.k8s.io/kustomize/kyaml v0.1.8
+## explicit
+sigs.k8s.io/kustomize/kyaml/errors
+sigs.k8s.io/kustomize/kyaml/fieldmeta
+sigs.k8s.io/kustomize/kyaml/openapi
+sigs.k8s.io/kustomize/kyaml/openapi/kubernetesapi
+sigs.k8s.io/kustomize/kyaml/openapi/kustomizationapi
+sigs.k8s.io/kustomize/kyaml/sets
+sigs.k8s.io/kustomize/kyaml/yaml
+sigs.k8s.io/kustomize/kyaml/yaml/schema
