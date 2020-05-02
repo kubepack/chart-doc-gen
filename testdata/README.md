@@ -7,7 +7,7 @@
 ```console
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm install stash-operator appscode/stash -n kube-system
+$ helm install stash-operator appscode/stash -n kube-system --version=v0.9.0-rc.0
 ```
 
 ## Introduction
@@ -103,12 +103,12 @@ The following table lists the configurable parameters of the `stash` chart and t
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```console
-$ helm install stash-operator appscode/stash -n kube-system --set replicaCount=1
+$ helm install stash-operator appscode/stash -n kube-system --version=v0.9.0-rc.0 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```console
-$ helm install stash-operator appscode/stash -n kube-system --values values.yaml
+$ helm install stash-operator appscode/stash -n kube-system --version=v0.9.0-rc.0 --values values.yaml
 ```
