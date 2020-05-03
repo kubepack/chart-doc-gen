@@ -13,8 +13,7 @@ Download the pre-built binaries from release page and copy to your $PATH directo
 
 ## How does it work
 
-`chart-doc-gen` takes a doc.yaml file and fills it with the values table auto generated from a chart values file.
-Then it renders to stdout a README.md file based on [readme template](./templates/readme.tpl).
+`chart-doc-gen` takes a [doc.yaml](./testdata/doc.yaml) file and fills it with a values table auto generated from a [chart values file](./testdata/values.yaml). Then it renders to stdout a README.md file based on [readme template](./templates/readme.tpl).
 
 `chart-doc-gen` walks a chart values file and generates a row for each leaf node in the values YAML document.
 The description of each leaf node must be written above it in comments.
