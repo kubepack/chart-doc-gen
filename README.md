@@ -1,10 +1,13 @@
+[![Go Report Card](https://goreportcard.com/badge/kubepack.dev/chart-doc-gen)](https://goreportcard.com/report/kubepack.dev/chart-doc-gen)
+[![Build Status](https://github.com/kubepack/chart-doc-gen/workflows/CI/badge.svg)](https://github.com/kubepack/chart-doc-gen/actions?workflow=CI)
+[![Github All Releases](https://img.shields.io/github/downloads/kubepack/chart-doc-gen/total.svg)](https://github.com/kubepack/chart-doc-gen/releases)
+[![Twitter](https://img.shields.io/twitter/follow/kubepack.svg?style=social&logo=twitter&label=Follow)](https://twitter.com/intent/follow?screen_name=Kubepack)
+
 # chart-doc-gen
 Helm Chart Documentation Generator
 
 ```console
-$ go run *.go \
-    -d=./testdata/doc.yaml \
-    -v=./testdata/values.yaml > ./testdata/README.md
+$ chart-doc-gen -d=./testdata/doc.yaml -v=./testdata/values.yaml > ./testdata/README.md
 ```
 
 ## Installation
