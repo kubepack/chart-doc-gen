@@ -12,7 +12,7 @@ $ go run *.go \
 Download the pre-built binaries from release page and copy to your $PATH directory. If you are using Go modules, you can install like below:
 
 ```console
-go get -u kmodules.xyz/chart-doc-gen@v0.2.8
+go get -u kubepack.dev/chart-doc-gen@v0.3.0
 ```
 
 ## How does it work

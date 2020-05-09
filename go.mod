@@ -1,4 +1,4 @@
-module kmodules.xyz/chart-doc-gen
+module kubepack.dev/chart-doc-gen
 
 go 1.14
 
