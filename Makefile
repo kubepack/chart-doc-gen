@@ -15,7 +15,7 @@
 
 SHELL=/bin/bash -o pipefail
 
-GO_PKG   := kmodules.xyz
+GO_PKG   := kubepack.dev
 REPO     := $(notdir $(shell pwd))
 BIN      := chart-doc-gen
 COMPRESS ?= no

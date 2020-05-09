@@ -1,5 +1,5 @@
 /*
-Copyright The Kmodules Authors.
+Copyright The Kubepack Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import (
 	"os"
 	"text/template"
 
-	"kmodules.xyz/chart-doc-gen/templates"
+	"kubepack.dev/chart-doc-gen/templates"
 
 	"github.com/olekukonko/tablewriter"
 	flag "github.com/spf13/pflag"
