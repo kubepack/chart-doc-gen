@@ -9,7 +9,11 @@ $ go run *.go \
 
 ## Installation
 
-Download the pre-built binaries from release page and copy to your $PATH directory.
+Download the pre-built binaries from release page and copy to your $PATH directory. If you are using Go modules, you can install like below:
+
+```console
+go get -u kmodules.xyz/chart-doc-gen@v0.2.8
+```
 
 ## How does it work
 
@@ -31,3 +35,26 @@ generated values table.
 
 ![values example](./images/values-example.png "Example in Description")
 ![values example preview](./images/values-example-preview.png "Preview Example in Description")
+
+## Use with CI
+
+You can use this tool in CI pipelines to ensure that your chart readme is up-to-date. You can use a Makefile with targets like below:
+
+```console
+.PHONY: gen
+gen: gen-chart-doc
+
+.PHONY: gen-chart-doc
+gen-chart-doc:
+	@echo "Generate chart docs"
+	@chart-doc-gen -d=./testdata/doc.yaml -v=./testdata/values.yaml > ./testdata/README.md
+
+.PHONY: verify
+verify: verify-gen
+
+.PHONY: verify-gen
+verify-gen: gen fmt
+	@if !(git diff --exit-code HEAD); then \
+		echo "generated files are out of date, run make gen"; exit 1; \
+	fi
+```
