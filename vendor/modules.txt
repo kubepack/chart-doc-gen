@@ -9,13 +9,13 @@ github.com/davecgh/go-spew/spew
 github.com/go-errors/errors
 # github.com/go-openapi/jsonpointer v0.19.3
 github.com/go-openapi/jsonpointer
-# github.com/go-openapi/jsonreference v0.19.2
+# github.com/go-openapi/jsonreference v0.19.3
 github.com/go-openapi/jsonreference
 # github.com/go-openapi/spec v0.19.5
 github.com/go-openapi/spec
 # github.com/go-openapi/swag v0.19.5
 github.com/go-openapi/swag
-# github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e
+# github.com/mailru/easyjson v0.7.0
 github.com/mailru/easyjson/buffer
 github.com/mailru/easyjson/jlexer
 github.com/mailru/easyjson/jwriter
@@ -27,7 +27,7 @@ github.com/olekukonko/tablewriter
 # github.com/spf13/pflag v1.0.5
 ## explicit
 github.com/spf13/pflag
-# golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+# golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
 golang.org/x/net/idna
 # golang.org/x/text v0.3.2
 golang.org/x/text/secure/bidirule
@@ -39,12 +39,12 @@ golang.org/x/text/width
 gopkg.in/yaml.v2
 # gopkg.in/yaml.v3 v3.0.0-20191120175047-4206685974f2
 gopkg.in/yaml.v3
-# k8s.io/apimachinery v0.18.2
+# k8s.io/apimachinery v0.18.3
 ## explicit
 k8s.io/apimachinery/pkg/util/yaml
 # k8s.io/klog v1.0.0
 k8s.io/klog
-# sigs.k8s.io/kustomize/kyaml v0.1.8
+# sigs.k8s.io/kustomize/kyaml v0.1.12
 ## explicit
 sigs.k8s.io/kustomize/kyaml/errors
 sigs.k8s.io/kustomize/kyaml/fieldmeta
