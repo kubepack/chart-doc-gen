@@ -688,11 +688,18 @@ func (rn *RNode) MarshalJSON() ([]byte, error) {
 		return nil, err
 	}
 
+	if rn.YNode().Kind == SequenceNode {
+		var a []interface{}
+		if err := Unmarshal([]byte(s), &a); err != nil {
+			return nil, err
+		}
+		return json.Marshal(a)
+	}
+
 	m := map[string]interface{}{}
 	if err := Unmarshal([]byte(s), &m); err != nil {
 		return nil, err
 	}
-
 	return json.Marshal(m)
 }
 
@@ -713,6 +720,24 @@ func (rn *RNode) UnmarshalJSON(b []byte) error {
 	}
 	rn.value = r.value
 	return nil
+}
+
+// ConvertJSONToYamlNode parses input json string and returns equivalent yaml node
+func ConvertJSONToYamlNode(jsonStr string) (*RNode, error) {
+	var body map[string]interface{}
+	err := json.Unmarshal([]byte(jsonStr), &body)
+	if err != nil {
+		return nil, err
+	}
+	yml, err := yaml.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	node, err := Parse(string(yml))
+	if err != nil {
+		return nil, err
+	}
+	return node, nil
 }
 
 // checkKey returns true if all elems have the key

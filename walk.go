@@ -17,7 +17,6 @@ limitations under the License.
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -99,7 +98,7 @@ func ParseComment(s string) (string, string) {
 func PrintValue(node *yaml.RNode) string {
 	if node.YNode().Kind == yaml.MappingNode || node.YNode().Kind == yaml.SequenceNode {
 		if !yaml.IsEmpty(node) {
-			data, err := MarshalJSON(node)
+			data, err := node.MarshalJSON()
 			if err != nil {
 				panic(err)
 			}
@@ -107,25 +106,4 @@ func PrintValue(node *yaml.RNode) string {
 		}
 	}
 	return strings.TrimSpace(node.MustString())
-}
-
-func MarshalJSON(rn *yaml.RNode) ([]byte, error) {
-	s, err := rn.String()
-	if err != nil {
-		return nil, err
-	}
-
-	if rn.YNode().Kind == yaml.SequenceNode {
-		var a []interface{}
-		if err := yaml.Unmarshal([]byte(s), &a); err != nil {
-			return nil, err
-		}
-		return json.Marshal(a)
-	}
-
-	m := map[string]interface{}{}
-	if err := yaml.Unmarshal([]byte(s), &m); err != nil {
-		return nil, err
-	}
-	return json.Marshal(m)
 }
