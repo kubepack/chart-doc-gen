@@ -46,7 +46,10 @@ func (l Walker) walkMap() (*yaml.RNode, error) {
 			if err != nil {
 				return nil, err
 			}
-
+			ignore := CommentValue(field.Key.YNode().LineComment) == "+doc-gen:ignore" || CommentValue(field.Value.YNode().LineComment) == "+doc-gen:ignore"
+			if ignore {
+				continue
+			}
 			breakout := CommentValue(field.Key.YNode().LineComment) == "+doc-gen:break"
 			if field.Value.YNode().Kind == yaml.ScalarNode ||
 				yaml.IsEmpty(field.Value) ||
