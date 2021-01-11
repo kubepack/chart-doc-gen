@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"kubepack.dev/chart-doc-gen/api"
 	"os"
 	"text/template"
 
+	"kubepack.dev/chart-doc-gen/api"
 	"kubepack.dev/chart-doc-gen/templates"
 
 	"github.com/olekukonko/tablewriter"
