@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"kubepack.dev/chart-doc-gen/api"
 	"os"
 	"text/template"
 
@@ -46,7 +47,7 @@ func main() {
 		panic(err)
 	}
 	reader := y2.NewYAMLOrJSONDecoder(f, 2048)
-	var doc DocInfo
+	var doc api.DocInfo
 	err = reader.Decode(&doc)
 	if err != nil && err != io.EOF {
 		panic(err)
