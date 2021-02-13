@@ -41,7 +41,7 @@ $ helm delete {{ .Release.Name }} -n {{ .Release.Namespace }}
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
-{{- if .Chart.Values }}
+{{ if .Chart.Values -}}
 ## Configuration
 
 The following table lists the configurable parameters of the `{{ .Chart.Name }}` chart and their default values.
