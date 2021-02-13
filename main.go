@@ -58,45 +58,50 @@ func main() {
 		panic(err)
 	}
 	obj, err := yaml.Parse(string(data))
-	if err != nil {
-		panic(err)
-	}
-	rows, err := GenerateValuesTable(obj)
-	if err != nil {
-		panic(err)
-	}
-
-	var params [][]string
-	for _, row := range rows {
-		params = append(params, []string{
-			row[0],
-			row[1],
-			fmt.Sprintf("`%s`", row[2]),
-		})
-	}
-
-	var buf bytes.Buffer
-	table := tablewriter.NewWriter(&buf)
-	table.SetHeader([]string{"Parameter", "Description", "Default"})
-	table.SetAutoFormatHeaders(false)
-	table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
-	table.SetAutoWrapText(false)
-	table.SetCenterSeparator("|")
-	table.AppendBulk(params) // Add Bulk Data
-	table.Render()
-
-	doc.Chart.Values = buf.String()
-	for _, row := range rows {
-		if row[2] != "" &&
-			row[2] != `""` &&
-			row[2] != "{}" &&
-			row[2] != "[]" &&
-			row[2] != "true" &&
-			row[2] != "false" &&
-			row[2] != "not-ca-cert" {
-			doc.Chart.ValuesExample = fmt.Sprintf("%v=%v", row[0], row[2])
-			break
+	if err == nil {
+		rows, err := GenerateValuesTable(obj)
+		if err != nil {
+			panic(err)
 		}
+
+		var params [][]string
+		for _, row := range rows {
+			params = append(params, []string{
+				row[0],
+				row[1],
+				fmt.Sprintf("`%s`", row[2]),
+			})
+		}
+
+		var buf bytes.Buffer
+		table := tablewriter.NewWriter(&buf)
+		table.SetHeader([]string{"Parameter", "Description", "Default"})
+		table.SetAutoFormatHeaders(false)
+		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+		table.SetAutoWrapText(false)
+		table.SetCenterSeparator("|")
+		table.AppendBulk(params) // Add Bulk Data
+		table.Render()
+
+		doc.Chart.Values = buf.String()
+
+		for _, row := range rows {
+			if row[2] != "" &&
+				row[2] != `""` &&
+				row[2] != "{}" &&
+				row[2] != "[]" &&
+				row[2] != "true" &&
+				row[2] != "false" &&
+				row[2] != "not-ca-cert" {
+				doc.Chart.ValuesExample = fmt.Sprintf("%v=%v", row[0], row[2])
+				break
+			}
+		}
+	} else if err == io.EOF {
+		doc.Chart.Values = ""
+		doc.Chart.ValuesExample = ""
+	} else {
+		panic(err)
 	}
 
 	tplReadme, err := ioutil.ReadFile(*tplFile)
