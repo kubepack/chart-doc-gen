@@ -167,3 +167,7 @@ additionalPodSecurityPolicies: []
 platform:
   # Set true, if installed in OpenShift
   openshift: false
+
+toIgnore: # +doc-gen:ignore
+  foo: true
+toIgnore2: false # +doc-gen:ignore
