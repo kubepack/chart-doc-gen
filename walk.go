@@ -97,7 +97,7 @@ func ParseComment(s string) (string, string) {
 
 func PrintValue(node *yaml.RNode) string {
 	if node.YNode().Kind == yaml.MappingNode || node.YNode().Kind == yaml.SequenceNode {
-		if !yaml.IsEmpty(node) {
+		if !yaml.IsMissingOrNull(node) {
 			data, err := node.MarshalJSON()
 			if err != nil {
 				panic(err)

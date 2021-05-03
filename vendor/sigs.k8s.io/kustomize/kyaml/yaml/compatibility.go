@@ -14,10 +14,10 @@ import (
 
 // typeToTag maps OpenAPI schema types to yaml 1.2 tags
 var typeToTag = map[string]string{
-	"string":  StringTag,
-	"integer": IntTag,
-	"boolean": BoolTag,
-	"number":  "!!float",
+	"string":  NodeTagString,
+	"integer": NodeTagInt,
+	"boolean": NodeTagBool,
+	"number":  NodeTagFloat,
 }
 
 // FormatNonStringStyle makes sure that values which parse as non-string values in yaml 1.1
@@ -70,6 +70,9 @@ func IsYaml1_1NonString(node *Node) bool {
 }
 
 func IsValueNonString(value string) bool {
+	if value == "" {
+		return false
+	}
 	if strings.Contains(value, "\n") {
 		// multi-line strings will fail to unmarshal
 		return false
