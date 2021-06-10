@@ -171,3 +171,6 @@ platform:
 toIgnore: # +doc-gen:ignore
   foo: true
 toIgnore2: false # +doc-gen:ignore
+
+# This top-level empty map should be documented
+empty: {}

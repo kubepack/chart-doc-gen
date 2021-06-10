@@ -53,6 +53,7 @@ func (l Walker) walkMap() (*yaml.RNode, error) {
 			breakout := CommentValue(field.Key.YNode().LineComment) == "+doc-gen:break"
 			if field.Value.YNode().Kind == yaml.ScalarNode ||
 				yaml.IsMissingOrNull(field.Value) ||
+				field.Value.IsNilOrEmpty() ||
 				breakout {
 				_, err = l.VisitLeaf(field.Key, field.Value, strings.Join(append(l.Path, key), "."), nil)
 				if err != nil {
