@@ -22,6 +22,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"strings"
 	"text/template"
 
 	"kubepack.dev/chart-doc-gen/api"
@@ -85,16 +86,18 @@ func main() {
 
 		doc.Chart.Values = buf.String()
 
-		for _, row := range rows {
-			if row[2] != "" &&
-				row[2] != `""` &&
-				row[2] != "{}" &&
-				row[2] != "[]" &&
-				row[2] != "true" &&
-				row[2] != "false" &&
-				row[2] != "not-ca-cert" {
-				doc.Chart.ValuesExample = fmt.Sprintf("%v=%v", row[0], row[2])
-				break
+		if doc.Chart.ValuesExample == "" || strings.HasPrefix(doc.Chart.ValuesExample, "-- generate from values file --") {
+			for _, row := range rows {
+				if row[2] != "" &&
+					row[2] != `""` &&
+					row[2] != "{}" &&
+					row[2] != "[]" &&
+					row[2] != "true" &&
+					row[2] != "false" &&
+					row[2] != "not-ca-cert" {
+					doc.Chart.ValuesExample = fmt.Sprintf("%v=%v", row[0], row[2])
+					break
+				}
 			}
 		}
 	} else if err == io.EOF {
