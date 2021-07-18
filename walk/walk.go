@@ -35,7 +35,7 @@ type Walker struct {
 }
 
 func (l Walker) Kind() yaml.Kind {
-	if !yaml.IsMissingOrNull(l.Source) {
+	if !yaml.IsEmpty(l.Source) {
 		return l.Source.YNode().Kind
 	}
 	return 0
@@ -76,7 +76,7 @@ func (l Walker) Walk() (*yaml.RNode, error) {
 
 func (l Walker) GetSchema() *openapi.ResourceSchema {
 	r := l.Source
-	if yaml.IsMissingOrNull(r) {
+	if yaml.IsEmpty(r) {
 		return nil
 	}
 
@@ -85,7 +85,7 @@ func (l Walker) GetSchema() *openapi.ResourceSchema {
 		// per-field schema, this is fine
 		if fm.Schema.Ref.String() != "" {
 			// resolve the reference
-			s, err := openapi.Resolve(&fm.Schema.Ref, &fm.Schema)
+			s, err := openapi.Resolve(&fm.Schema.Ref)
 			if err == nil && s != nil {
 				fm.Schema = *s
 			}
@@ -98,7 +98,7 @@ func (l Walker) GetSchema() *openapi.ResourceSchema {
 	}
 
 	r = l.Source
-	if yaml.IsMissingOrNull(r) {
+	if yaml.IsEmpty(r) {
 		return nil
 	}
 

@@ -36,7 +36,7 @@ func (l Walker) walkMap() (*yaml.RNode, error) {
 				continue
 			}
 			field := l.Source.Field(key)
-			if field == nil || yaml.IsMissingOrNull(field.Key) {
+			if field == nil || yaml.IsEmpty(field.Key) {
 				continue
 			}
 
@@ -52,7 +52,7 @@ func (l Walker) walkMap() (*yaml.RNode, error) {
 			}
 			breakout := CommentValue(field.Key.YNode().LineComment) == "+doc-gen:break"
 			if field.Value.YNode().Kind == yaml.ScalarNode ||
-				yaml.IsMissingOrNull(field.Value) ||
+				yaml.IsEmpty(field.Value) ||
 				breakout {
 				_, err = l.VisitLeaf(field.Key, field.Value, strings.Join(append(l.Path, key), "."), nil)
 				if err != nil {
@@ -108,7 +108,7 @@ func (l Walker) valueIfPresent(node *yaml.MapNode) (*yaml.RNode, *openapi.Resour
 	if err = fm.Read(node.Value); err == nil {
 		s = &openapi.ResourceSchema{Schema: &fm.Schema}
 		if fm.Schema.Ref.String() != "" {
-			r, err := openapi.Resolve(&fm.Schema.Ref, &fm.Schema)
+			r, err := openapi.Resolve(&fm.Schema.Ref)
 			if err == nil && r != nil {
 				s.Schema = r
 			}
@@ -122,7 +122,7 @@ func (l Walker) valueIfPresent(node *yaml.MapNode) (*yaml.RNode, *openapi.Resour
 			s = &openapi.ResourceSchema{Schema: &fm.Schema}
 		}
 		if fm.Schema.Ref.String() != "" {
-			r, err := openapi.Resolve(&fm.Schema.Ref, &fm.Schema)
+			r, err := openapi.Resolve(&fm.Schema.Ref)
 			if err == nil && r != nil {
 				s.Schema = r
 			}
@@ -151,7 +151,7 @@ func (l Walker) fieldValue(fieldName string) (*yaml.RNode, *openapi.ResourceSche
 	var sch *openapi.ResourceSchema
 	field := l.Source.Field(fieldName)
 	f, s := l.valueIfPresent(field)
-	if sch == nil && !s.IsMissingOrNull() {
+	if sch == nil && !s.IsEmpty() {
 		sch = s
 	}
 	return f, sch
