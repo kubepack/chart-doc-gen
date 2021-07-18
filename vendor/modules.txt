@@ -4,7 +4,7 @@ github.com/PuerkitoBio/purell
 github.com/PuerkitoBio/urlesc
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/go-errors/errors v1.0.2
+# github.com/go-errors/errors v1.0.1
 ## explicit
 github.com/go-errors/errors
 # github.com/go-openapi/jsonpointer v0.19.3
@@ -19,31 +19,30 @@ github.com/go-openapi/swag
 github.com/mailru/easyjson/buffer
 github.com/mailru/easyjson/jlexer
 github.com/mailru/easyjson/jwriter
-# github.com/mattn/go-runewidth v0.0.7
+# github.com/mattn/go-runewidth v0.0.9
 github.com/mattn/go-runewidth
-# github.com/olekukonko/tablewriter v0.0.4
+# github.com/olekukonko/tablewriter v0.0.5
 ## explicit
 github.com/olekukonko/tablewriter
 # github.com/spf13/pflag v1.0.5
 ## explicit
 github.com/spf13/pflag
-# golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+# golang.org/x/net v0.0.0-20210224082022-3d97a244fca7
 golang.org/x/net/idna
-# golang.org/x/text v0.3.2
+# golang.org/x/text v0.3.4
 golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
 golang.org/x/text/width
-# gopkg.in/yaml.v2 v2.2.8
+# gopkg.in/yaml.v2 v2.4.0
 gopkg.in/yaml.v2
-# gopkg.in/yaml.v3 v3.0.0-20191120175047-4206685974f2
+# gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
 gopkg.in/yaml.v3
-# k8s.io/apimachinery v0.18.3
+# k8s.io/apimachinery v0.21.1
 ## explicit
+k8s.io/apimachinery/pkg/util/json
 k8s.io/apimachinery/pkg/util/yaml
-# k8s.io/klog v1.0.0
-k8s.io/klog
 # sigs.k8s.io/kustomize/kyaml v0.1.12
 ## explicit
 sigs.k8s.io/kustomize/kyaml/errors
