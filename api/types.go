@@ -39,7 +39,7 @@ type RepositoryInfo struct {
 
 type ChartInfo struct {
 	Name          string `json:"name"`
-	Version       string `json:"version"`
+	Version       string `json:"version,omitempty"`
 	Values        string `json:"values"`
 	ValuesExample string `json:"valuesExample"`
 }
