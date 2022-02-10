@@ -18,7 +18,6 @@ package main
 
 import (
 	"bytes"
-	"strings"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -72,9 +71,9 @@ func main() {
 				row[0],
 				row[1],
 				fmt.Sprintf(
-					"<code>%s</code>",  // use a html code block instead of backtics so the whole block get highlighted
-					strings.ReplaceAll(  // replace all newlines, they generate new table columns with tablewriter
-						strings.ReplaceAll(row[2], "|", "&#124;"),  // replace all pipe symbols with their ACSII representation, because they break the markdown table
+					"<code>%s</code>", // use a html code block instead of backtics so the whole block get highlighted
+					strings.ReplaceAll( // replace all newlines, they generate new table columns with tablewriter
+						strings.ReplaceAll(row[2], "|", "&#124;"), // replace all pipe symbols with their ACSII representation, because they break the markdown table
 						"\n",
 						"&#13;&#10;",
 					),
