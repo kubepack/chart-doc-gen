@@ -22,7 +22,7 @@ This chart deploys {{ .Project.App }} on a [Kubernetes](http://kubernetes.io) cl
 
 ## Installing the Chart
 
-To install the chart with the release name `{{ .Release.Name }}`:
+To install/upgrade the chart with the release name `{{ .Release.Name }}`:
 
 ```bash
 $ helm upgrade -i {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }} --create-namespace{{ with .Chart.Version }} --version={{.}}{{ end }}
@@ -34,7 +34,7 @@ The command deploys {{ .Project.App }} on the Kubernetes cluster in the default 
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `{{ .Release.Name }}`:
+To uninstall the `{{ .Release.Name }}`:
 
 ```bash
 $ helm uninstall {{ .Release.Name }} -n {{ .Release.Namespace }}
