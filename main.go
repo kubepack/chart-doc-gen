@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	iofs "io/fs"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -117,7 +118,7 @@ func main() {
 	tplReadme, err := ioutil.ReadFile(*tplFile)
 	if err != nil {
 		if os.IsNotExist(err) {
-			tplReadme, err = templates.Asset("readme.tpl")
+			tplReadme, err = iofs.ReadFile(templates.FS(), "readme.tpl")
 			if err != nil {
 				panic(err)
 			}
