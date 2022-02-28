@@ -23,6 +23,7 @@ import (
 	iofs "io/fs"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -31,14 +32,16 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 	flag "github.com/spf13/pflag"
-	y2 "k8s.io/apimachinery/pkg/util/yaml"
+	ylib "k8s.io/apimachinery/pkg/util/yaml"
 	"sigs.k8s.io/kustomize/kyaml/yaml"
+	yaml2 "sigs.k8s.io/yaml"
 )
 
 var (
-	docFile    *string = flag.StringP("doc", "d", "", "Path to a project's doc.{json|yaml} info file")
-	valuesFile *string = flag.StringP("values", "v", "", "Path to chart values file")
-	tplFile    *string = flag.StringP("template", "t", "readme2.tpl", "Path to a doc template file")
+	docFile    = flag.StringP("doc", "d", "", "Path to a project's doc.{json|yaml} info file")
+	chartFile  = flag.StringP("chart", "c", "", "Path to Chart.yaml file")
+	valuesFile = flag.StringP("values", "v", "", "Path to chart values file")
+	tplFile    = flag.StringP("template", "t", "readme2.tpl", "Path to a doc template file")
 )
 
 func main() {
@@ -48,7 +51,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	reader := y2.NewYAMLOrJSONDecoder(f, 2048)
+	reader := ylib.NewYAMLOrJSONDecoder(f, 2048)
 	var doc api.DocInfo
 	err = reader.Decode(&doc)
 	if err != nil && err != io.EOF {
@@ -113,6 +116,22 @@ func main() {
 		doc.Chart.ValuesExample = ""
 	} else {
 		panic(err)
+	}
+
+	{
+		if *chartFile == "" {
+			*chartFile = filepath.Join(filepath.Dir(*valuesFile), "Chart.yaml")
+		}
+		data, err := ioutil.ReadFile(*chartFile)
+		if err != nil {
+			panic(err)
+		}
+		var ci api.ChartInfo
+		if err = yaml2.Unmarshal(data, &ci); err != nil {
+			panic(err)
+		}
+		doc.Chart.Name = ci.Name
+		doc.Chart.Version = ci.Version
 	}
 
 	tplReadme, err := ioutil.ReadFile(*tplFile)
