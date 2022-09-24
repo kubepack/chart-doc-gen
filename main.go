@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"io"
 	iofs "io/fs"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -58,7 +57,7 @@ func main() {
 		panic(err)
 	}
 
-	data, err := ioutil.ReadFile(*valuesFile)
+	data, err := os.ReadFile(*valuesFile)
 	if err != nil {
 		panic(err)
 	}
@@ -122,7 +121,7 @@ func main() {
 		if *chartFile == "" {
 			*chartFile = filepath.Join(filepath.Dir(*valuesFile), "Chart.yaml")
 		}
-		data, err := ioutil.ReadFile(*chartFile)
+		data, err := os.ReadFile(*chartFile)
 		if err != nil {
 			panic(err)
 		}
@@ -134,7 +133,7 @@ func main() {
 		doc.Chart.Version = ci.Version
 	}
 
-	tplReadme, err := ioutil.ReadFile(*tplFile)
+	tplReadme, err := os.ReadFile(*tplFile)
 	if err != nil {
 		if os.IsNotExist(err) {
 			tplReadme, err = iofs.ReadFile(templates.FS(), "readme.tpl")
