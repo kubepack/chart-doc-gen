@@ -14,9 +14,15 @@ $ chart-doc-gen -d=./testdata/doc.yaml -v=./testdata/values.yaml > ./testdata/RE
 
 Download the pre-built binaries from release page and copy to your $PATH directory. If you are using Go modules, you can install like below:
 
+
 ```console
-go get -u kubepack.dev/chart-doc-gen@v0.3.0
+# Go versions >= 1.17
+go install kubepack.dev/chart-doc-gen@v0.3.0
+
+# For Older versions of go (<= 1.16) use 'go get'
+# go get -u kubepack.dev/chart-doc-gen@v0.3.0
 ```
+
 
 ## How does it work
 
