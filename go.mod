@@ -21,8 +21,8 @@ require (
 	github.com/go-openapi/swag v0.19.5 // indirect
 	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
-	golang.org/x/net v0.0.0-20210224082022-3d97a244fca7 // indirect
-	golang.org/x/text v0.3.4 // indirect
+	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )
