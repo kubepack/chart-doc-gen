@@ -7,17 +7,17 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/go-openapi/spec"
 	y1_1 "gopkg.in/yaml.v2"
-	y1_2 "gopkg.in/yaml.v3"
+	"k8s.io/kube-openapi/pkg/validation/spec"
+	y1_2 "sigs.k8s.io/kustomize/kyaml/internal/forked/github.com/go-yaml/yaml"
 )
 
 // typeToTag maps OpenAPI schema types to yaml 1.2 tags
 var typeToTag = map[string]string{
-	"string":  StringTag,
-	"integer": IntTag,
-	"boolean": BoolTag,
-	"number":  "!!float",
+	"string":  NodeTagString,
+	"integer": NodeTagInt,
+	"boolean": NodeTagBool,
+	"number":  NodeTagFloat,
 }
 
 // FormatNonStringStyle makes sure that values which parse as non-string values in yaml 1.1
@@ -45,6 +45,14 @@ func FormatNonStringStyle(node *Node, schema spec.Schema) {
 	default:
 		return
 	}
+
+	// if the node tag is null, make sure we don't add any non-null tags
+	// https://github.com/GoogleContainerTools/kpt/issues/2321
+	if node.Tag == NodeTagNull {
+		// must NOT quote null values
+		node.Style = 0
+		return
+	}
 	if tag, found := typeToTag[t]; found {
 		// make sure the right tag is set
 		node.Tag = tag
@@ -70,6 +78,9 @@ func IsYaml1_1NonString(node *Node) bool {
 }
 
 func IsValueNonString(value string) bool {
+	if value == "" {
+		return false
+	}
 	if strings.Contains(value, "\n") {
 		// multi-line strings will fail to unmarshal
 		return false
