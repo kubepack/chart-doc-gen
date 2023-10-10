@@ -33,3 +33,5 @@ coverage.txt
 /.go
 
 apiserver.local.config/**
+
+chart-doc-gen
