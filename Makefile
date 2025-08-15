@@ -54,7 +54,7 @@ BIN_PLATFORMS    := $(DOCKER_PLATFORMS) windows/amd64 darwin/amd64
 OS   := $(if $(GOOS),$(GOOS),$(shell go env GOOS))
 ARCH := $(if $(GOARCH),$(GOARCH),$(shell go env GOARCH))
 
-GO_VERSION       ?= 1.21
+GO_VERSION       ?= 1.25
 BUILD_IMAGE      ?= ghcr.io/appscode/golang-dev:$(GO_VERSION)
 
 OUTBIN = bin/$(BIN)-$(OS)-$(ARCH)
@@ -220,7 +220,7 @@ lint: $(BUILD_DIRS)
 	    --env GO111MODULE=on                                    \
 	    --env GOFLAGS="-mod=vendor"                             \
 	    $(BUILD_IMAGE)                                          \
-	    golangci-lint run --enable $(ADDTL_LINTERS) --deadline=10m --exclude-files="generated.*\.go$\" --exclude-dirs-use-default
+	    golangci-lint run --enable $(ADDTL_LINTERS) --timeout=10m --exclude-files="generated.*\.go$\" --exclude-dirs-use-default
 
 $(BUILD_DIRS):
 	@mkdir -p $@
