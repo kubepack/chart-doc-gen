@@ -88,7 +88,8 @@ func (l Walker) elementKey() (string, error) {
 		if key != "" && key != newKey {
 			return "", errors.Errorf(
 				"conflicting merge keys [%s,%s] for field %s",
-				key, newKey, strings.Join(l.Path, "."))
+				key, newKey, strings.Join(l.Path, "."),
+			)
 		}
 		key = newKey
 	}
